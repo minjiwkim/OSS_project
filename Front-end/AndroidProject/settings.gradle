@@ -1,0 +1,10 @@
+include ':sdk'
+include ':sdk'
+include ':sdk'
+include ':sdk'
+include ':sdk'
+include ':sdk'
+include ':sdk'
+include ':sdk'
+project(':sdk').projectDir = new File(rootDir, 'app/opencv/sdk/')
+include ':sdk'
