@@ -1,0 +1,76 @@
+import xml.etree.ElementTree as ET
+import os
+
+# Define the class mapping
+class_mapping = {
+    "traffic_light_controller": 0,
+    "power_controller": 1,
+    "wheelchair": 2,
+    "truck": 3,
+    "tree_trunk": 4,
+    "traffic_sign": 5,
+    "traffic_light": 6,
+    "table": 7,
+    "stroller": 8,
+    "stop": 9,
+    "scooter": 10,
+    "potted_plant": 11,
+    "pole": 12,
+    "person": 13,
+    "parking_meter": 14,
+    "movable_signage": 15,
+    "motorcycle": 16,
+    "kiosk": 17,
+    "fire_hydrant": 18,
+    "dog": 19,
+    "chair": 20,
+    "cat": 21,
+    "carrier": 22,
+    "car": 23,
+    "bus": 24,
+    "bollard": 25,
+    "bicycle": 26,
+    "bench": 27,
+    "barricade": 28
+}
+
+# Function to convert XML annotations to YOLO format
+def convert_to_yolo(xml_file):
+    tree = ET.parse(xml_file)
+    root = tree.getroot()
+
+    for image in root.findall('image'):
+        img_width = int(image.get('width'))
+        img_height = int(image.get('height'))
+        img_name = image.get('name')
+        yolo_annotations = []
+
+        for box in image.findall('box'):
+            label = box.get('label')
+            class_id = class_mapping[label]
+
+            xtl = float(box.get('xtl'))
+            ytl = float(box.get('ytl'))
+            xbr = float(box.get('xbr'))
+            ybr = float(box.get('ybr'))
+
+            center_x = (xtl + xbr) / 2 / img_width
+            center_y = (ytl + ybr) / 2 / img_height
+            width = (xbr - xtl) / img_width
+            height = (ybr - ytl) / img_height
+
+            yolo_annotations.append(f"{class_id} {center_x:.6f} {center_y:.6f} {width:.6f} {height:.6f}")
+
+        # Save the annotations to a txt file
+        txt_file_name = os.path.splitext(img_name)[0] + ".txt"
+        with open(txt_file_name, 'w') as f:
+            for annotation in yolo_annotations:
+                f.write(f"{annotation}\n")
+
+    print("Conversion completed!")
+
+# File paths
+xml_file = './ossProject/my_data/labels/convert/bbox_sample.xml'
+
+# Convert and save the annotations
+convert_to_yolo(xml_file)
