@@ -4,11 +4,8 @@
     <!--인터넷 권한-->
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!--카메라 권한-->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
+    <!--진동 기능 권한-->
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -21,7 +18,7 @@
         android:theme="@style/Theme.MyApplication1"
         tools:targetApi="31">
 
-        <!-- 새로운 Activity 선언 -->
+        <!-- 첫 번째 Activity -->
         <activity
             android:name=".FirstActivity"
             android:exported="true">
@@ -34,20 +31,10 @@
             </intent-filter>
         </activity>
 
-        <!-- 기존의 MainActivity -->
+        <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-
-        <!--카메라 activity-->
-        <activity
-            android:name=".CameraActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
