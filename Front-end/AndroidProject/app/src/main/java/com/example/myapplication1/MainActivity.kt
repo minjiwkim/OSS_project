@@ -17,12 +17,19 @@ import androidx.core.view.ViewCompat
 import java.util.*
 import android.os.*
 import android.view.*
-import android.view.animation.*
+
 import android.widget.*
 import androidx.core.view.*
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.util.Log
 import java.util.Locale
+
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import network.ApiClient
+import network.ApiService
 
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
@@ -103,7 +110,40 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
             override fun onError(utteranceId: String?) {}
         })
+
+        //////////////////////////////////////////////////////////////////////////////
+        // Retrofit API 호출 추가
+        val apiService = ApiClient.getClient().create(ApiService::class.java)
+
+        // Root endpoint 호출
+        apiService.getRoot().enqueue(object : Callback<Map<String, String>> {
+            override fun onResponse(call: Call<Map<String, String>>, response: Response<Map<String, String>>) {
+                if (response.isSuccessful) {
+                    val result = response.body()
+                    Log.d("API", "Root: ${result?.get("Hello")}")
+                }
+            }
+
+            override fun onFailure(call: Call<Map<String, String>>, t: Throwable) {
+                Log.e("API", "Error: ${t.message}")
+            }
+        })
+
+        // Item endpoint 호출
+        apiService.getItem(1, "query").enqueue(object : Callback<Map<String, String>> {
+            override fun onResponse(call: Call<Map<String, String>>, response: Response<Map<String, String>>) {
+                if (response.isSuccessful) {
+                    val result = response.body()
+                    Log.d("API", "Item: ${result?.get("item_id")}")
+                }
+            }
+
+            override fun onFailure(call: Call<Map<String, String>>, t: Throwable) {
+                Log.e("API", "Error: ${t.message}")
+            }
+        })
     }
+    //////////////////////////////////////////////////////////////
 
     private fun startPeriodicTextOutput() {
         val runnable = object : Runnable {
