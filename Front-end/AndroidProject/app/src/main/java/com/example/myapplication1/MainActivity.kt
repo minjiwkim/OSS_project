@@ -23,8 +23,18 @@ import androidx.core.view.*
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import java.util.Locale
+import retrofit2.*
+import android.content.pm.PackageManager
+import androidx.camera.core.AspectRatio
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+import androidx.core.app.ActivityCompat
 
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
+
+    private lateinit var previewView: PreviewView
 
     private lateinit var vibrator: Vibrator
     private var isVibrateModeOn: Boolean = false
@@ -39,6 +49,10 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var isExiting: Boolean = false
 
+    companion object{
+        const val PERMISSION = 1
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -49,6 +63,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         val main = findViewById<View>(R.id.main)
         val button1 = findViewById<Button>(R.id.button1)
         val button2 = findViewById<Button>(R.id.button2)
+        previewView = findViewById(R.id.previewView)
 
         ViewCompat.setOnApplyWindowInsetsListener(main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -56,9 +71,31 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             insets
         }
 
-        textToSpeech = TextToSpeech(this, this)
+        // 화면 터치 이벤트 처리
+        val mainView = findViewById<View>(R.id.main)
+        mainView.setOnTouchListener { _, event ->
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    // 화면의 절반을 기준으로 왼쪽과 오른쪽을 구분
+                    if (event.x < mainView.width / 2) {
+                        // 왼쪽 절반을 터치한 경우 진동 모드 토글
+                        toggleVibrateMode()
+                    } else {
+                        // 오른쪽 절반을 터치한 경우 앱 종료
+                        exitApp()
+                    }
+                }
+            }
+            true
+        }
 
-        startPeriodicTextOutput()
+        //권한 허용
+        setPermissions()
+
+        //카메라 켜기
+        setCamera()
+
+        textToSpeech = TextToSpeech(this, this)
 
         button1.setOnClickListener {
             // 버튼1의 동작이 앱 종료 상태일 때는 동작하지 않도록 함
@@ -103,19 +140,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
             override fun onError(utteranceId: String?) {}
         })
-    }
-
-    private fun startPeriodicTextOutput() {
-        val runnable = object : Runnable {
-            override fun run() {
-                if (!isExiting) {
-                    val randomText = exampleTexts.random()
-                    announceDescription(randomText)
-                    handler.postDelayed(this, 10000)
-                }
-            }
-        }
-        handler.post(runnable)
     }
 
     // 앱이 종료되고 있을 때 새로운 설명 제공하지 않음
@@ -234,6 +258,54 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "popupTTS")
             }
             textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params, "popupTTS")
+        }
+    }
+
+    private fun setCamera() {
+        //카메라 제공 객체
+        val processCameraProvider = ProcessCameraProvider.getInstance(this).get()
+
+        //전체 화면
+        previewView.scaleType = PreviewView.ScaleType.FILL_CENTER
+
+        // 전면 카메라
+        val cameraSelector =
+            CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
+
+        // 16:9 화면으로 받아옴
+        val preview = Preview.Builder().setTargetAspectRatio(AspectRatio.RATIO_16_9).build()
+
+        // preview 에서 받아와서 previewView 에 보여준다.
+        preview.setSurfaceProvider(previewView.surfaceProvider)
+
+        // 카메라의 수명 주기를 메인 액티비티에 귀속
+        processCameraProvider.bindToLifecycle(this, cameraSelector, preview)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == PERMISSION) {
+            grantResults.forEach {
+                if (it != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "권한을 허용하지 않으면 사용할 수 없습니다", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun setPermissions() {
+        val permissions = ArrayList<String>()
+        permissions.add(android.Manifest.permission.CAMERA)
+
+        permissions.forEach {
+            if (ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, permissions.toTypedArray(), PERMISSION)
+            }
         }
     }
 

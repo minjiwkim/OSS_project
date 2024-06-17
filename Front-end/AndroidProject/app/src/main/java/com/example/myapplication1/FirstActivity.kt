@@ -34,7 +34,7 @@ class FirstActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Toast.makeText(this, "언어를 지원하지 않습니다.", Toast.LENGTH_SHORT).show()
             } else {
-                textToSpeech.speak("안내를 시작합니다. 왼쪽 상단에 진동 모드 온오프 버튼이 있고, 오른쪽 상단에 종료 버튼이 있습니다.", TextToSpeech.QUEUE_FLUSH, null, null)
+                textToSpeech.speak("안내를 시작합니다. 화면 왼쪽에 진동 모드 온오프 버튼이 있고, 오른쪽에 종료 버튼이 있습니다.", TextToSpeech.QUEUE_FLUSH, null, null)
             }
         } else {
             Toast.makeText(this, "TTS 초기화에 실패했습니다.", Toast.LENGTH_SHORT).show()

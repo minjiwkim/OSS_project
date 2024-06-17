@@ -7,6 +7,11 @@
     <!--진동 기능 권한-->
     <uses-permission android:name="android.permission.VIBRATE"/>
 
+    <!--카메라 기능 권한-->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
