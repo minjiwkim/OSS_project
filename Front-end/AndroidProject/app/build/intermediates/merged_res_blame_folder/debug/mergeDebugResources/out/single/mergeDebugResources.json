@@ -1,0 +1,110 @@
+[
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\layout_activity_popup.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\layout\\activity_popup.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\drawable_rounded_button.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\drawable\\rounded_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\drawable_seeya_text2.png.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\drawable\\seeya_text2.png"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\drawable_text_background.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\drawable\\text_background.xml"
+    },
+    {
+        "merged": "com.example.myapplication1.app-debug-4:/layout_activity_main.xml.flat",
+        "source": "com.example.myapplication1.app-main-6:/layout/activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\anim_slide_in_up.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\anim\\slide_in_up.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\anim_slide_out_down.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\anim\\slide_out_down.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\layout_activity_first.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\layout\\activity_first.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\drawable_rounded_button_gray.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\drawable\\rounded_button_gray.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\drawable_rounded_textbox.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\drawable\\rounded_textbox.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-debug-4:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\Minji\\.gradle\\daemon\\8.6\\com.example.myapplication1.app-main-6:\\drawable\\ic_launcher_background.xml"
+    }
+]
