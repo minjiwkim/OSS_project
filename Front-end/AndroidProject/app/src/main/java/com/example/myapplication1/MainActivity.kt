@@ -23,33 +23,31 @@ import androidx.core.view.*
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import java.util.Locale
-import retrofit2.*
 import android.content.pm.PackageManager
-import androidx.camera.core.AspectRatio
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
-
+import java.util.concurrent.Executors
+import ai.onnxruntime.OnnxTensor
+import ai.onnxruntime.OrtEnvironment
+import ai.onnxruntime.OrtSession
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private lateinit var previewView: PreviewView
-
+    private lateinit var rectView: RectView
+    private lateinit var ortEnvironment: OrtEnvironment
+    private lateinit var session: OrtSession
     private lateinit var vibrator: Vibrator
-    private var isVibrateModeOn: Boolean = false
-
     private lateinit var textToSpeech: TextToSpeech
     private lateinit var popupWindow: PopupWindow
-    private val handler = Handler(Looper.getMainLooper())
-    private val exampleTexts = listOf(
-        "전방에 자전거가 있습니다. 오른쪽으로 피하세요.",
-        "전방에 자동차가 있습니다. 왼쪽으로 피하세요."
-    )
-
+    private var isVibrateModeOn: Boolean = false
     private var isExiting: Boolean = false
+    private val handler = Handler(Looper.getMainLooper())
 
-    companion object{
+    private val dataProcess = DataProcess(context = this)
+
+    companion object {
         const val PERMISSION = 1
     }
 
@@ -63,7 +61,9 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         val main = findViewById<View>(R.id.main)
         val button1 = findViewById<Button>(R.id.button1)
         val button2 = findViewById<Button>(R.id.button2)
+
         previewView = findViewById(R.id.previewView)
+        rectView = findViewById(R.id.rectView)
 
         ViewCompat.setOnApplyWindowInsetsListener(main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -89,8 +89,14 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             true
         }
 
+        //자동 꺼짐 해제
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
         //권한 허용
         setPermissions()
+
+        // onnx 파일 && txt 파일 불러오기
+        load()
 
         //카메라 켜기
         setCamera()
@@ -275,11 +281,54 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         // 16:9 화면으로 받아옴
         val preview = Preview.Builder().setTargetAspectRatio(AspectRatio.RATIO_16_9).build()
 
-        // preview 에서 받아와서 previewView 에 보여준다.
+        // preview 에서 받아와서 previewView에 보여준다.
         preview.setSurfaceProvider(previewView.surfaceProvider)
 
+        //분석 중이면 그 다음 화면이 대기중인 것이 아니라 계속 받아오는 화면으로 새로고침 함. 분석이 끝나면 그 최신 사진을 다시 분석
+        val analysis = ImageAnalysis.Builder().setTargetAspectRatio(AspectRatio.RATIO_16_9)
+            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build()
+
+        analysis.setAnalyzer(Executors.newSingleThreadExecutor()) {
+            imageProcess(it)
+            it.close()
+        }
+
         // 카메라의 수명 주기를 메인 액티비티에 귀속
-        processCameraProvider.bindToLifecycle(this, cameraSelector, preview)
+        processCameraProvider.bindToLifecycle(this, cameraSelector, preview, analysis)
+    }
+
+    private fun imageProcess(imageProxy: ImageProxy) {
+        val bitmap = dataProcess.imageToBitmap(imageProxy)
+        val floatBuilder = dataProcess.bitmapToFloatBuffer(bitmap)
+        val inputName = session.inputNames.iterator().next() // session 이름
+        //모델의 요구 입력값 [1 3 640 640] [배치 사이즈, 픽셀(RGB), 너비, 높이], 모델마다 크기는 다를 수 있음.
+        val shape = longArrayOf(
+            DataProcess.BATCH_SIZE.toLong(),
+            DataProcess.PIXEL_SIZE.toLong(),
+            DataProcess.INPUT_SIZE.toLong(),
+            DataProcess.INPUT_SIZE.toLong()
+        )
+        val inputTensor = OnnxTensor.createTensor(ortEnvironment, floatBuilder, shape)
+        val resultTensor = session.run(Collections.singletonMap(inputName, inputTensor))
+        val outputs = resultTensor.get(0).value as Array<*> // [1 84 8400]
+        val results = dataProcess.outputsToNPMSPredictions(outputs)
+
+        //화면 표출
+        rectView.transformRect(results)
+        rectView.invalidate()
+    }
+
+    private fun load() {
+        dataProcess.loadModel() // onnx 모델 불러오기
+        dataProcess.loadLabel() // coco txt 파일 불러오기
+
+        ortEnvironment = OrtEnvironment.getEnvironment()
+        session = ortEnvironment.createSession(
+            this.filesDir.absolutePath.toString() + "/" + DataProcess.FILE_NAME,
+            OrtSession.SessionOptions()
+        )
+
+        rectView.setClassLabel(dataProcess.classes)
     }
 
     override fun onRequestPermissionsResult(
@@ -309,7 +358,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
-    // 팝업창 닫기 애니메이션
+    //z 팝업창 닫기 애니메이션
     private fun closePopupWithAnimation() {
         val slideDown = TranslateAnimation(
             Animation.RELATIVE_TO_SELF, 0f,

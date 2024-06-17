@@ -45,6 +45,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
     /////// 변환된 YOLO 모델을 실행하기 위해 필요한 라이브러리
     // 추후 수정
     implementation("androidx.camera:camera-core:1.3.3")
@@ -57,4 +58,7 @@ dependencies {
 
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // https://mvnrepository.com/artifact/com.microsoft.onnxruntime/onnxruntime-android
+    implementation ("com.microsoft.onnxruntime:onnxruntime-android:1.18.0")
 }
