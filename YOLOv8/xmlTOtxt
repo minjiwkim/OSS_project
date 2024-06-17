@@ -1,5 +1,9 @@
 import xml.etree.ElementTree as ET
 import os
+import shutil
+
+import os
+import xml.etree.ElementTree as ET
 
 # Define the class mapping
 class_mapping = {
@@ -35,7 +39,7 @@ class_mapping = {
 }
 
 # Function to convert XML annotations to YOLO format
-def convert_to_yolo(xml_file):
+def convert_to_yolo(xml_file, output_dir):
     tree = ET.parse(xml_file)
     root = tree.getroot()
 
@@ -61,8 +65,8 @@ def convert_to_yolo(xml_file):
 
             yolo_annotations.append(f"{class_id} {center_x:.6f} {center_y:.6f} {width:.6f} {height:.6f}")
 
-        # Save the annotations to a txt file
-        txt_file_name = os.path.splitext(img_name)[0] + ".txt"
+        # Save the annotations to a txt file in the specified output directory
+        txt_file_name = os.path.join(output_dir, os.path.splitext(img_name)[0] + ".txt")
         with open(txt_file_name, 'w') as f:
             for annotation in yolo_annotations:
                 f.write(f"{annotation}\n")
@@ -70,7 +74,8 @@ def convert_to_yolo(xml_file):
     print("Conversion completed!")
 
 # File paths
-xml_file = './ossProject/my_data/labels/convert/bbox_sample.xml'
+xml_file = '/content/drive/MyDrive/oss_final_project/oss_final_project2/labels/Bbox_0040/0624_01.xml' # label xml file
+output_dir = '/content/drive/MyDrive/oss_final_project/oss_final_project2/labels/Bbox_0040'
 
 # Convert and save the annotations
-convert_to_yolo(xml_file)
+convert_to_yolo(xml_file, output_dir)
