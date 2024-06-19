@@ -25,21 +25,22 @@
 
         <!-- 첫 번째 Activity -->
         <activity
-            android:name=".FirstActivity"
-            android:exported="true">
+                android:name=".FirstActivity"
+                android:exported="true"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <!--#######################################################3-->
                 <action android:name="android.intent.action.TTS_SERVICE" />
-
             </intent-filter>
         </activity>
 
         <!-- MainActivity -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+                android:name=".MainActivity"
+                android:exported="true"
+                android:screenOrientation="portrait" />
     </application>
 
 </manifest>
