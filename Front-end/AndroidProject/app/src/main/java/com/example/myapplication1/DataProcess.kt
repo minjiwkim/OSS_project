@@ -132,6 +132,9 @@ class DataProcess(val context: Context) {
                 val yPos = output[i][1]
                 val width = output[i][2]
                 val height = output[i][3]
+
+                val centerX = xPos * INPUT_SIZE // 예시에서는 입력 이미지 크기를 기준으로 계산
+
                 //사각형은 화면 밖으로 나갈 수 없으니 화면을 넘기면 최대 화면 값을 가지게 한다.
                 val rectF = RectF(
                     max(0f, xPos - width / 2f),
