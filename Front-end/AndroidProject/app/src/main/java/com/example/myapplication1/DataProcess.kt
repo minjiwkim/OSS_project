@@ -19,7 +19,7 @@ class DataProcess(val context: Context) {
 
     companion object {
         const val BATCH_SIZE = 1
-        const val INPUT_SIZE = 800
+        const val INPUT_SIZE = 640
         const val PIXEL_SIZE = 3
         const val FILE_NAME = "yolov8n.onnx"
         const val LABEL_NAME = "yolov8n.txt"

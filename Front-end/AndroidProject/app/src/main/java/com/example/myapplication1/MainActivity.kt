@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private val handler = Handler(Looper.getMainLooper())
     private val objectTranslations: MutableMap<String, String> = mutableMapOf()
     private val dataProcess = DataProcess(context = this)
-    private val detectionQueue: Queue<String> = LinkedList()
+    private val detectionQueue: Queue<Pair<String, String>> = LinkedList()
 
     companion object {
         const val PERMISSION = 1
@@ -100,6 +100,17 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 }
             }
             true
+        }
+
+        button2.setOnClickListener {
+            // 앱 종료 기능 실행
+            exitApp()
+            // 클릭한 버튼의 배경색 변경
+            button2.setBackgroundColor(Color.GRAY)
+            // 200 밀리초 후에 버튼의 배경 색을 원래대로 변경
+            handler.postDelayed({
+                button2.setBackgroundColor(Color.parseColor("#0070C0"))
+            }, 200)
         }
 
         //자동 꺼짐 해제
@@ -222,21 +233,19 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         getSharedPreferences("settings", MODE_PRIVATE).edit().putBoolean("vibrate_mode", isVibrateModeOn).apply()
     }
 
-
     // 앱 종료 설정
     private fun exitApp() {
+        stopAllTTS()
+        isExiting = true
         val params = Bundle().apply {
             putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "exitTTS")
         }
         textToSpeech.speak("안내를 종료합니다.", TextToSpeech.QUEUE_FLUSH, params, "exitTTS")
-
-        if (!isExiting) {
-            isExiting = true
-        }
     }
 
 
-    private fun showPopup(text: String) {
+
+    private fun showPopup(text: String, direction: String) {
         // 기존 팝업이 열려 있다면 닫기
         if (::popupWindow.isInitialized && popupWindow.isShowing) {
             popupWindow.dismiss()
@@ -263,17 +272,26 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         val mainView = findViewById<View>(R.id.main)
         mainView.post {
-            popupWindow.showAtLocation(mainView, Gravity.CENTER, 0, 0)
+            popupWindow.showAtLocation(mainView, Gravity.BOTTOM, 0, 0)
             popupView.startAnimation(slideUp)
 
             // 팝업 창에 결과 텍스트 표시
-            val popupText = popupView.findViewById<TextView>(R.id.TextPopup)
+            val popupText = popupView.findViewById<TextView>(R.id.textViewPopup)
             popupText.text = text
 
             val params = Bundle().apply {
                 putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "popupTTS")
             }
             textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params, "popupTTS")
+
+            // 진동 모드가 켜져 있는 경우, 방향에 따라 진동 실행
+            if (isVibrateModeOn) {
+                if (direction == "오른쪽") {
+                    vibrateMultipleTimes(2)
+                } else {
+                    vibrateMultipleTimes(1)
+                }
+            }
         }
     }
 
@@ -301,7 +319,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         analysis.setAnalyzer(Executors.newSingleThreadExecutor()) {
             try {
                 imageProcess(it)
-                processImage(it)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -314,25 +331,69 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun imageProcess(imageProxy: ImageProxy) {
         val bitmap = dataProcess.imageToBitmap(imageProxy)
-        val floatBuilder = dataProcess.bitmapToFloatBuffer(bitmap)
-        val inputName = session.inputNames.iterator().next() // session 이름
+        val floatBuffer = dataProcess.bitmapToFloatBuffer(bitmap)
         //모델의 요구 입력값 [1 3 640 640] [배치 사이즈, 픽셀(RGB), 너비, 높이], 모델마다 크기는 다를 수 있음.
+        val inputName = session.inputNames.iterator().next()
         val shape = longArrayOf(
             DataProcess.BATCH_SIZE.toLong(),
             DataProcess.PIXEL_SIZE.toLong(),
             DataProcess.INPUT_SIZE.toLong(),
             DataProcess.INPUT_SIZE.toLong()
         )
-        val inputTensor = OnnxTensor.createTensor(ortEnvironment, floatBuilder, shape)
+        val inputTensor = OnnxTensor.createTensor(ortEnvironment, floatBuffer, shape)
         val resultTensor = session.run(Collections.singletonMap(inputName, inputTensor))
-        val outputs = resultTensor.get(0).value as Array<*> // [1 84 8400]
+
+        val outputs = resultTensor[0].value as Array<*>
         val results = dataProcess.outputsToNPMSPredictions(outputs)
 
-        //화면 표출
-        rectView.transformRect(results)
-        rectView.invalidate()
+        // UI 스레드에서 처리
+        runOnUiThread {
+            results.forEach { result ->
+                val detectedObject = dataProcess.classes[result.classIndex]
+                val centerX = (result.rectF.left + result.rectF.right) / 2
+                val imageWidth = bitmap.width.toFloat()
+
+                val translatedObjectName = objectTranslations[detectedObject]
+                val isObjectOnLeft = centerX <= imageWidth / 2 // 이미지의 왼쪽 절반에 있으면 true, 아니면 false
+                val direction = if (isObjectOnLeft) "오른쪽" else "왼쪽"
+                val message = "전방에 $translatedObjectName 있습니다. $direction 으로 피하세요."
+
+                // 팝업창에 결과 표시
+                if (shouldShowPopup()) {
+                    detectionQueue.add(Pair(message, direction))
+                    processNextDetection()
+                }
+            }
+
+            // 화면 표출
+            rectView.transformRect(results)
+            rectView.invalidate()
+        }
+        imageProxy.close() // 이미지 처리 완료 후 닫기
     }
 
+    // 팝업 및 TTS를 표시할지 여부를 결정하는 함수
+    private fun shouldShowPopup(): Boolean {
+        val currentTime = System.currentTimeMillis()
+        val elapsedTime = currentTime - lastDetectionTime
+
+        // 마지막 감지 시간으로부터 5초가 지났거나, 첫 번째 감지인 경우에만 허용
+        if (elapsedTime >= 5000 || lastDetectionTime == 0L) {
+            lastDetectionTime = currentTime // 마지막 감지 시간 갱신
+            return true
+        }
+
+        return false
+    }
+
+    override fun onDestroy() {
+        if (::textToSpeech.isInitialized) {
+            textToSpeech.stop()
+            textToSpeech.shutdown()
+        }
+        handler.removeCallbacksAndMessages(null)
+        super.onDestroy()
+    }
 
     private fun load() {
         dataProcess.loadModel() // onnx 모델 불러 오기
@@ -347,6 +408,16 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         rectView.setClassLabel(dataProcess.classes)
     }
 
+    private fun setPermissions() {
+        val permissions = ArrayList<String>()
+        permissions.add(android.Manifest.permission.CAMERA)
+
+        permissions.forEach {
+            if (ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, permissions.toTypedArray(), PERMISSION)
+            }
+        }
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -363,19 +434,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
-
-
-    private fun setPermissions() {
-        val permissions = ArrayList<String>()
-        permissions.add(android.Manifest.permission.CAMERA)
-
-        permissions.forEach {
-            if (ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, permissions.toTypedArray(), PERMISSION)
-            }
-        }
-    }
-
 
     // 팝업창 닫기 애니메이션
     private fun closePopupWithAnimation() {
@@ -429,9 +487,9 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     // 다음 TTS 처리를 위한 큐 메커니즘
     private fun processNextDetection() {
         if (!isSpeaking && detectionQueue.isNotEmpty()) {
-            val message = detectionQueue.poll()
+            val (message, direction) = detectionQueue.poll()
             runOnUiThread {
-                showPopup(message)
+                showPopup(message, direction)
             }
         }
     }
@@ -445,7 +503,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
-
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             val result = textToSpeech.setLanguage(Locale.KOREAN)
@@ -456,7 +513,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             Toast.makeText(this, "초기화에 실패했습니다.", Toast.LENGTH_SHORT).show()
         }
     }
-
 
     private fun loadObjectTranslations() {
         val assetManager: AssetManager = resources.assets
@@ -471,7 +527,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
         }
     }
-
 
     private fun translateObjectToKorean(englishObject: String): String {
         return when (englishObject) {
@@ -558,119 +613,5 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             "toothbrush" -> "칫솔이"
             else -> englishObject
         }
-    }
-
-
-    /*
-    private fun speakDetectedObject(objectName: String, positionX: Float, imageWidth: Float) {
-        val translatedObjectName = objectTranslations[objectName]
-        val isObjectOnLeft = positionX <= imageWidth / 2 // 이미지의 왼쪽 절반에 있으면 true, 아니면 false
-
-        val direction = if (isObjectOnLeft) "오른쪽" else "왼쪽"
-        val message = "전방에 $translatedObjectName 있습니다. $direction 으로 피하세요."
-
-        // 진동 모드가 켜져 있는 경우, 방향에 따라 진동 실행
-        if (isVibrateModeOn) {
-            if (isObjectOnLeft) {
-                vibrateMultipleTimes(2)
-            } else {
-                vibrateMultipleTimes(1)
-            }
-        }
-
-        detectionQueue.offer(message)
-        processNextDetection()
-    }
-     */
-
-
-    private fun processImage(imageProxy: ImageProxy) {
-        try {
-            val bitmap = dataProcess.imageToBitmap(imageProxy)
-            val floatBuffer = dataProcess.bitmapToFloatBuffer(bitmap)
-
-            val inputName = session.inputNames.iterator().next()
-            val shape = longArrayOf(
-                DataProcess.BATCH_SIZE.toLong(),
-                DataProcess.PIXEL_SIZE.toLong(),
-                DataProcess.INPUT_SIZE.toLong(),
-                DataProcess.INPUT_SIZE.toLong()
-            )
-
-            val inputTensor = OnnxTensor.createTensor(ortEnvironment, floatBuffer, shape)
-            val resultTensor = session.run(Collections.singletonMap(inputName, inputTensor))
-
-            val outputs = resultTensor[0].value as Array<*>
-            val results = dataProcess.outputsToNPMSPredictions(outputs)
-
-            // UI 스레드에서 처리
-            runOnUiThread {
-                var isAnyObjectDetected = false // 감지된 객체가 있는지 여부
-
-                results.forEach { result ->
-                    val detectedObject = dataProcess.classes[result.classIndex]
-                    val centerX = (result.rectF.left + result.rectF.right) / 2
-                    val imageWidth = bitmap.width.toFloat()
-
-                    val translatedObjectName = objectTranslations[detectedObject]
-                    val isObjectOnLeft = centerX <= imageWidth / 2 // 이미지의 왼쪽 절반에 있으면 true, 아니면 false
-                    val direction = if (isObjectOnLeft) "오른쪽" else "왼쪽"
-                    val message = "전방에 $translatedObjectName 있습니다. $direction 으로 피하세요."
-
-                    // 팝업창에 결과 표시
-                    if (shouldShowPopup()) {
-                        showPopup(message)
-                        isAnyObjectDetected = true // 객체가 감지되었음을 표시
-                    }
-
-                    // 진동 모드가 켜져 있는 경우, 방향에 따라 진동 실행
-                    if (isVibrateModeOn) {
-                        if (isObjectOnLeft) {
-                            vibrateMultipleTimes(2)
-                        } else {
-                            vibrateMultipleTimes(1)
-                        }
-                    }
-                }
-
-                // 객체가 감지된 경우에만 다음 처리를 진행
-                if (isAnyObjectDetected) {
-                    processNextDetection()
-                }
-
-                // 화면 표출
-                rectView.transformRect(results)
-                rectView.invalidate()
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            imageProxy.close() // 이미지 처리 완료 후 닫기
-        }
-    }
-
-
-    // 팝업 및 TTS를 표시할지 여부를 결정하는 함수
-    private fun shouldShowPopup(): Boolean {
-        val currentTime = System.currentTimeMillis()
-        val elapsedTime = currentTime - lastDetectionTime
-
-        // 마지막 감지 시간으로부터 5초가 지났거나, 첫 번째 감지인 경우에만 허용
-        if (elapsedTime >= 5000 || lastDetectionTime == 0L) {
-            lastDetectionTime = currentTime // 마지막 감지 시간 갱신
-            return true
-        }
-
-        return false
-    }
-
-
-    override fun onDestroy() {
-        if (::textToSpeech.isInitialized) {
-            textToSpeech.stop()
-            textToSpeech.shutdown()
-        }
-        handler.removeCallbacksAndMessages(null)
-        super.onDestroy()
     }
 }
