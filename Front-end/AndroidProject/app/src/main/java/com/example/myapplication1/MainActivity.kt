@@ -102,17 +102,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             true
         }
 
-        button2.setOnClickListener {
-            // 앱 종료 기능 실행
-            exitApp()
-            // 클릭한 버튼의 배경색 변경
-            button2.setBackgroundColor(Color.GRAY)
-            // 200 밀리초 후에 버튼의 배경 색을 원래대로 변경
-            handler.postDelayed({
-                button2.setBackgroundColor(Color.parseColor("#0070C0"))
-            }, 200)
-        }
-
         //자동 꺼짐 해제
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
@@ -286,7 +275,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
             // 진동 모드가 켜져 있는 경우, 방향에 따라 진동 실행
             if (isVibrateModeOn) {
-                if (direction == "오른쪽") {
+                if (direction == "오른쪽으로") {
                     vibrateMultipleTimes(2)
                 } else {
                     vibrateMultipleTimes(1)
@@ -355,8 +344,8 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
                 val translatedObjectName = objectTranslations[detectedObject]
                 val isObjectOnLeft = centerX <= imageWidth / 2 // 이미지의 왼쪽 절반에 있으면 true, 아니면 false
-                val direction = if (isObjectOnLeft) "오른쪽" else "왼쪽"
-                val message = "전방에 $translatedObjectName 있습니다. $direction 으로 피하세요."
+                val direction = if (isObjectOnLeft) "오른쪽으로" else "왼쪽으로"
+                val message = "전방에 $translatedObjectName 있습니다.\n$direction 피하세요."
 
                 // 팝업창에 결과 표시
                 if (shouldShowPopup()) {
