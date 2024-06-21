@@ -4,7 +4,7 @@
 object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사용하여 시각장애인이 보행 중 위협 요소가 되는 각종 장애물을 피할 수 있도록 돕는 Android 기반 애플리케이션입니다.
 
 <img src="https://github.com/jinsol24/OSS-project/assets/144991060/79ac8dcb-d835-46ab-97bc-db1b46fca0cc.png" width="200" height="400"/>
-![activity_main](https://github.com/jinsol24/OSS-project/assets/144991060/09f8e6fb-8632-4d39-a056-0198621671e9)
+<img src="https://github.com/jinsol24/OSS-project/assets/144991060/09f8e6fb-8632-4d39-a056-0198621671e9.png" width="200" height="400"/>
 
 ---
 ## 목차
