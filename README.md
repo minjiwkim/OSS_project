@@ -36,6 +36,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 1. YOLOv8 폴더 설명
    - Colab의 GPU와 Google Drive을 사용해 YOLOv8 모델을 학습시켰습니다.
    - xmlToyolo.ipynb 파일
+
      XML 형식의 라벨링 format을 YOLO format으로 변경해 저장하는 소스코드입니다.
      
    - checkData.ipynb
