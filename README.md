@@ -7,7 +7,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 + 프로젝트 소개
 + 프로그램 설명
 + YOLOv8을 활용한 모델과 UI 설명
-+ 코드 설명
++ 활용 방법 설명(각 소스 코드 파일 설명)
 + 한계점과 보안
 ---
 ## 프로젝트 소개
@@ -19,9 +19,9 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 + 설치 및 실행 방법: Android Sudio를 설치하고 Code-clone한 후 Front-end/AndroidProject를 실행합니다. 안드로이드 기반 스마트폰의 설정-휴대전화 정보-소프트웨어 정보에서 빌드 번호 5번을 누르면 개발자 옵션이 생기는데, 이 옵션에서 USB 디버깅을 켜고 휴대폰과 컴퓨터를 USB 선으로 연결합니다. Android Studio에서 run을 누르면 휴대폰에서 앱이 실행됩니다.
 + 라이선스: MIT license
 ---
-## YOLOv6을 활용한 모델과 UI 설명
+## YOLOv8을 활용한 모델과 UI 설명
 1. YOLOv8 모델
-   - YOLOv8은 2023년 1월 발표된 버전으로, 현재 YOLOv10까지 발표되었으나 자료가 풍부한 YOLOv8을 채택했습니다.
+   - YOLOv8은 2023년 1월 발표된 버전으로, 현재 YOLOv10까지 발표되었으나 자료가 풍부한 YOLOv8을 채택했습니다. (2024.06.21 기준)
    - YOLO는 실시간 객체 검출 알고리즘으로, 객체 검출을 단 한번의 순전파만으로 수행하는 효율적인 방법입니다.
    - AI-Hub의 인도보행 영상 Bounding Box 데이터셋을 활용해 모델을 훈련시켰습니다.(데이터셋 링크: https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=&topMenu=&aihubDataSe=data&dataSetSn=189)
    - 데이터를 저장햘 용량 문제와 GPU 문제로 약 4000개의 데이터밖에 활용 못했지만, 성능 향상을 위해 훨씬 더 많은 데이터를 사용할 것을 권장드립니다.
@@ -29,6 +29,13 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 2. UI
    - 화면 상단의 좌측에는 진동 모드 ON/OFF 버튼, 우측에는 종료 버튼을 배치했습니다.
    - 사용자가 시각장애인임을 고려하여 꼭 버튼이 아니더라도 화면 왼쪽/오른쪽만 터치해도 버튼 기능이 작동하도록 하였습니다.
-   - 어플리케이션이 잘 실행되는지 확인하기 위해 화면 중앙에 카메라 화면을 띄웠습니다.
-   - 어플리케이션이 잘 실행되는지 확인하기 위해 팝업창으로 위험요소 회피 문구 안내하도록 했습니다. (음성으로도 안내함)
+   - 애플리케이션이 잘 실행되는지 확인하기 위해 화면 중앙에 카메라 화면을 띄웠습니다.
+   - 음성과 함꼐 팝업창으로 위험요소 회피 문구 안내하도록 했습니다. (팝업창은 애플리케이션이 잘 실행되는지 확인하기 위해 띄움)
+---
+## 활용 방법 설명(각 소스 코드 파일 설명)
+1. YOLOv8 폴더 설명
+   - Colab의 GPU와 Google Drive을 사용해 YOLOv8 모델을 학습시켰습니다.
+   - xmlToyolo.ipynb 파일
+   - - 
+
 
