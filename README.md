@@ -117,31 +117,44 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
    <details>
    <summary> MainActivity.kt </summary>
       
-   -	onCreate: activity_main 화면에 YOLO 모델을 연결하고 진동 모드 ON/OFF, 앱 종료, TTS, 팝업의 기능이 작동하도록 구현하였습니다. 또 화면 절반을 기준으로 왼쪽을 터치하면 진동 모드 ON/OFF, 오른쪽을 터치하면 앱 종료 기능이 실행됩니다.
+   -	onCreate
+     activity_main 화면에 YOLO 모델을 연결하고 진동 모드 ON/OFF, 앱 종료, TTS, 팝업의 기능이 작동하도록 구현하였습니다. 또 화면 절반을 기준으로 왼쪽을 터치하면 진동 모드 ON/OFF, 오른쪽을 터치하면 앱 종료 기능이 실행됩니다.
 
-   -	setCamera: 카메라를 연결합니다.
+   -	setCamera
+     카메라를 연결합니다.
      
-   -	imageProcess: 이미지를 받아온 후 중앙 세로선을 기준으로 이미지가 왼쪽에 있으면 “전방에 [객체]이/가 있습니다. 오른쪽으로 피하세요.”, 오른쪽에 있으면 “전방에 [객체]이/가 있습니다. 왼쪽으로 피하세요.”라는 문구의 TTS가 출력됩니다. rectView로 객체 위치를 표시합니다.
+   -	imageProcess
+     이미지를 받아온 후 중앙 세로선을 기준으로 이미지가 왼쪽에 있으면 “전방에 [객체]이/가 있습니다. 오른쪽으로 피하세요.”, 오른쪽에 있으면 “전방에 [객체]이/가 있습니다. 왼쪽으로 피하세요.”라는 문구의 TTS가 출력됩니다. rectView로 객체 위치를 표시합니다.
      
-   -	shouldShowPopup: 팝업과 TTS를 5초간 지속하는 함수입니다. 동시에 여러 객체가 인식될 경우 혼란을 방지하기 위해 한 객체에 대한 팝업과 TTS가 나오고 5초 뒤에 새로운 팝업과 TTS가 나오도록 구현했습니다.
+   -	shouldShowPopup
+     팝업과 TTS를 5초간 지속하는 함수입니다. 동시에 여러 객체가 인식될 경우 혼란을 방지하기 위해 한 객체에 대한 팝업과 TTS가 나오고 5초 뒤에 새로운 팝업과 TTS가 나오도록 구현했습니다.
      
-   -	onDestroy: TTS를 종료하는 함수입니다.
+   -	onDestroy
+     TTS를 종료하는 함수입니다.
      
-   -	load: YOLO 모델을 불러오는 함수입니다.
+   -	load
+     YOLO 모델을 불러오는 함수입니다.
      
-   -	setPermissions, onRequestPermissionsResult: 카메라 권한 허용 여부에 따라 앱을 작동하거나 ”권한을 허용하지 않으면 사용할 수 없습니다.”라는 문구의 토스트 팝업을 출력합니다.
+   -	setPermissions, onRequestPermissionsResult
+     카메라 권한 허용 여부에 따라 앱을 작동하거나 ”권한을 허용하지 않으면 사용할 수 없습니다.”라는 문구의 토스트 팝업을 출력합니다.
      
-   -	closePopupWithAnimation: 팝업창 닫기 애니메이션을 관리하는 함수입니다.
+   -	closePopupWithAnimation
+     팝업창 닫기 애니메이션을 관리하는 함수입니다.
      
-   -	handlePopupDismiss: TTS와 팝업을 동기화하는 함수입니다.
+   -	handlePopupDismiss
+     TTS와 팝업을 동기화하는 함수입니다.
      
-   -	processNextDetection: 다음 TTS 처리를 위한 큐 메커니즘을 보여주는 함수입니다.
+   -	processNextDetection
+     다음 TTS 처리를 위한 큐 메커니즘을 보여주는 함수입니다.
      
-   -	stopAllTTS: 모든 TTS를 중지하는 함수입니다.
+   -	stopAllTTS
+     모든 TTS를 중지하는 함수입니다.
      
-   -	onInit: 한국어 TTS만 출력하게 하는 함수입니다.
+   -	onInit
+     한국어 TTS만 출력하게 하는 함수입니다.
      
-   -	translateObjectToKorean, loadObjectTranslations: 객체 탐지 결과를 한국어로 변환하는 함수입니다.
+   -	translateObjectToKorean, loadObjectTranslations
+     객체 탐지 결과를 한국어로 변환하는 함수입니다.
    </details>
 
    <details>
