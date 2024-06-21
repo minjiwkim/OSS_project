@@ -39,6 +39,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 ## 활용 방법 설명: 각 소스 코드 파일 설명
 
 1. YOLOv8 폴더 설명
+   
    Colab의 GPU와 Google Drive을 사용해 YOLOv8 모델을 학습시켰습니다. 따라서 Colab에서 GPU를 연결한 뒤, Google Drive를 mount해야 합니다.
    
    <details>
@@ -97,6 +98,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
    </details>
 
 2. UI 코드 설명
+   
    Android Studio에서 Front-end/AndroidProject/app/src/main 파일을 열면 코드를 확인할 수 있습니다.
    <details>
    <summary> AndroidManifest.xml </summary>
