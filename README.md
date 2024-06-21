@@ -6,7 +6,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 ## 목차
 1. [프로젝트 소개](#프로젝트-소개)
 2. [YOLOv8을 활용한 모델과 UI 설명](#YOLOv8을-활용한-모델과-UI-설명)
-3. [활용 방법 설명(각 소스 코드 파일 설명)](#활용-방법-설명(각-소스-코드-파일-설명))
+3. [활용 방법 설명(각 소스 코드 파일 설명)](#활용-방법-설명:각-소스-코드-파일-설명)
 4. [한계점과 보안](#한계점과-보안)
 5. [참고문헌](#참고문헌)
 ---
@@ -32,7 +32,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
    - 애플리케이션이 잘 실행되는지 확인하기 위해 화면 중앙에 카메라 화면을 띄웠습니다.
    - 음성과 함께 팝업창으로 위험요소 회피 문구 안내하도록 했습니다. (팝업창은 애플리케이션이 잘 실행되는지 확인하기 위해 띄움)
 ---
-## 활용 방법 설명(각 소스 코드 파일 설명)
+## 활용 방법 설명:각 소스 코드 파일 설명
 1. YOLOv8 폴더 설명
    - Colab의 GPU와 Google Drive을 사용해 YOLOv8 모델을 학습시켰습니다. 따라서 Colab에서 GPU를 연결한 뒤, Google Drive를 mount해야 합니다.
    - xmlToyolo.ipynb 파일
