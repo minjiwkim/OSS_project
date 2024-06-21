@@ -56,7 +56,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
    </details>
    
    <details>
-   <summary>checkData.ipynb</sumary>
+   <summary> checkData.ipynb </sumary>
       
    AI-hub에서 인도보행 Bounding Box 데이터셋을 다운로드 받으면 여러 개의 폴더로 나누어져 있습니다. Bbox_****(ex. Bbox_0001) 이름의 폴더안에 파일이 제대로 저장되었는지 확인하는 소스 코드 파일입니다.
 
