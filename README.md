@@ -40,16 +40,18 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 
 1. YOLOv8 폴더 설명
    
+   
    Colab의 GPU와 Google Drive을 사용해 YOLOv8 모델을 학습시켰습니다. 따라서 Colab에서 GPU를 연결한 뒤, Google Drive를 mount해야 합니다.
    
    <details>
    <summary> xmlToyolo.ipynb 파일 </summary>
+   
 
-     XML 형식의 라벨링 format을 YOLO format으로 변경해 저장하는 소스코드입니다. AI-hub의 인도보행 Bounding Box 데이터셋은 Bbox_/*/*/*/*(ex. Bbox_0001) 폴더 안에 평균적으로 100개의 이미지와 1개의 xml 형식의 라벨을 포함하고 있습니다. 이 xml 형식의 라벨 format을 YOLO format으로 변경해줘야 합니다.
+     XML 형식의 라벨링 format을 YOLO format으로 변경해 저장하는 소스코드입니다. AI-hub의 인도보행 Bounding Box 데이터셋은 Bbox_****(ex. Bbox_0001) 폴더 안에 평균적으로 100개의 이미지와 1개의 xml 형식의 라벨을 포함하고 있습니다. 이 xml 형식의 라벨 format을 YOLO format으로 변경해줘야 합니다.
    
    이미지를 저장하는 images 폴더와 라벨을 저장하는 labels 폴더를 따로 만들어 저장하는 것을 권장드립니다.(추후, 제대로 저장되었는지 확인하기 위해)
    
-   labes 폴더 밑에 Bbox_/*/*/*/*(ex. Bbox_0001) 형식의 폴더를 만들어 해당하는 라벨을 따로 저장하는 것을 권장드립니다. 이 파일에 YOLO format으로 변경된 라벨을 각각 저장해줍니다.
+   labes 폴더 밑에 Bbox_****(ex. Bbox_0001) 형식의 폴더를 만들어 해당하는 라벨을 하나씩 따로 저장하는 것을 권장드립니다. 이 폴더에 YOLO format으로 변경된 라벨을 각각 저장해줍니다.
    
    class_mapping에는 데이터셋의 class 이름과 인덱스가 들어갑니다. 다른 데이터셋을 사용한다면 이를 수정해야 합니다.
    
@@ -57,9 +59,10 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
    </details>
    
    <details>
-   <summary> checkData.ipynb </sumary>
+   <summary> checkData.ipynb </summary>
+   
       
-   AI-hub에서 인도보행 Bounding Box 데이터셋을 다운로드 받으면 여러 개의 폴더로 나누어져 있습니다. Bbox_****(ex. Bbox_0001) 이름의 폴더안에 파일이 제대로 저장되었는지 확인하는 소스 코드 파일입니다.
+   AI-hub에서 인도보행 Bounding Box 데이터셋을 다운로드 받으면 여러 개의 폴더(`Bbox_****`)로 나누어져 있습니다. Bbox_****(ex. Bbox_0001) 이름의 폴더 안에 파일이 제대로 저장되었는지 확인하는 소스 코드 파일입니다.
 
      해당 소스코드의 텍스트(주석)을 참고하면 더 도움이 될 수 있습니다.
    
@@ -68,7 +71,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
      위의 코드가 수행되었다면 images/Bbox_****과 labels/Bbox_****에는 각각 이미지와 이 이미지에 해당하는 라벨이 저장되어 있습니다.
      제대로 저장되어 있는지 확인하기 위해 소스코드의 '폴더에 있는 파일 개수 세기'를 실행합니다. `images/Bbox_****`과 `labels/Bbox_****` 안에 있는 파일 개수 차이가 1이라면 제대로 저장된 것입니다. (labels/Bbox_****에는 xml 파일이 있기 때문에 파일 개수가 하나 더 많습니다.)
 
-     제대로 저장이 안 되어 있다면 폴더를 확인하여 중복되거나 없는 이미지 파일, 라벨 파일이 있는지 확인해 수정합니다.
+     제대로 저장이 안 되어 있다면 폴더를 확인하여 중복되거나 없는 이미지 파일, 라벨 파일이 있는지 확인해 직접 수정합니다.
 
      제대로 저장되었다면 'xml 파일 지우기' 부분을 실행하여 xml 파일을 삭제합니다.
 
@@ -79,6 +82,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 
    <details>
    <summary>data.yaml</summary>
+   
 
      YOLOv8 기준 yaml 파일입니다.
 
@@ -87,6 +91,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 
    <details>
    <summary>yolov8.ipynb</summary>
+   
 
      YOLOv8 CLI를 활용해 모델을 훈련 시킵니다.
 
@@ -97,7 +102,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
      Android Studio에서 학습된 모델을 활용하기 위해 onnx 형태로 export 해 줍니다.
    </details>
 
-2. UI 코드 설명
+3. UI 코드 설명
    
    Android Studio에서 Front-end/AndroidProject/app/src/main 파일을 열면 코드를 확인할 수 있습니다.
    <details>
