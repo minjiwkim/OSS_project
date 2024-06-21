@@ -12,7 +12,6 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 2. [YOLOv8을 활용한 모델과 UI 설명](#YOLOv8을-활용한-모델과-UI-설명)
 3. [활용 방법 설명:각 소스 코드 파일 설명](#활용-방법-설명각-소스-코드-파일-설명)
 4. [한계점과 보완](#한계점과-보완)
-5. [참고문헌](#참고문헌)
 ---
 ## 프로젝트 소개
 + 숙명여자대학교 IT공학전공(현 인공지능공학부) 오픈소스프로그래밍 수업의 기말 팀 프로젝트
@@ -44,7 +43,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
    Colab의 GPU와 Google Drive을 사용해 YOLOv8 모델을 학습시켰습니다. 따라서 Colab에서 GPU를 연결한 뒤, Google Drive를 mount해야 합니다.
 
    <details>
-   <summary> xmlToyolo.ipynb 파일 </summary>
+   <summary> xmlToyolo.ipynb </summary>
 
 
      XML 형식의 라벨링 format을 YOLO format으로 변경해 저장하는 소스코드입니다. AI-hub의 인도보행 Bounding Box 데이터셋은 Bbox_****(ex. Bbox_0001) 폴더 안에 평균적으로 100개의 이미지와 1개의 xml 형식의 라벨을 포함하고 있습니다. 이 xml 형식의 라벨 format을 YOLO format으로 변경해줘야 합니다.
@@ -102,7 +101,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
      Android Studio에서 학습된 모델을 활용하기 위해 onnx 형태로 export 해 줍니다.
    </details>
 
-3. UI 코드 설명
+2. UI 코드 설명
 
    Android Studio에서 Front-end/AndroidProject/app/src/main 파일을 열면 코드를 확인할 수 있습니다.
    <details>
