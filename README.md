@@ -116,6 +116,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 
    <details>
    <summary> MainActivity.kt </summary>
+
       
    -	onCreate
 
