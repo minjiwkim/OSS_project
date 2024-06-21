@@ -42,7 +42,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
    Colab의 GPU와 Google Drive을 사용해 YOLOv8 모델을 학습시켰습니다. 따라서 Colab에서 GPU를 연결한 뒤, Google Drive를 mount해야 합니다.
    
    <details>
-   <summary>xmlToyolo.ipynb 파일</summary>
+   <summary> xmlToyolo.ipynb 파일 </summary>
 
      XML 형식의 라벨링 format을 YOLO format으로 변경해 저장하는 소스코드입니다. AI-hub의 인도보행 Bounding Box 데이터셋은 Bbox_/*/*/*/*(ex. Bbox_0001) 폴더 안에 평균적으로 100개의 이미지와 1개의 xml 형식의 라벨을 포함하고 있습니다. 이 xml 형식의 라벨 format을 YOLO format으로 변경해줘야 합니다.
    
@@ -96,7 +96,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
      Android Studio에서 학습된 모델을 활용하기 위해 onnx 형태로 export 해 줍니다.
    </details>
 
-2. UI 설명
+2. UI 코드 설명
    <details>
    <summary> AndroidManifest.xml </summary>
    인터넷 진동, 카메라 기능 권한을 추가하였고 화면 자동 회전을 비활성화했습니다.
@@ -109,6 +109,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 
    <details>
    <summary> MainActivity.kt </summary>
+      
    -	onCreate: activity_main 화면에 YOLO 모델을 연결하고 진동 모드 ON/OFF, 앱 종료, TTS, 팝업의 기능이 작동하도록 구현하였습니다. 또 화면 절반을 기준으로 왼쪽을 터치하면 진동 모드 ON/OFF, 오른쪽을 터치하면 앱 종료 기능이 실행됩니다.
 
    -	setCamera: 카메라를 연결합니다.
