@@ -39,7 +39,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 
      XML 형식의 라벨링 format을 YOLO format으로 변경해 저장하는 소스코드입니다.
      
-     AI-hub에서 인도보행 Bounding Box 데이터셋을 다운로드 받으면 여러 개의 폴더로 나누어져 있습니다. Bbox_****(ex. Bbox_0001) 이름의 폴더가 있으며 각 폴더 안에는 평균적으로 100개의 이미지와 하나의 XML 라벨 파일있습니다. 이 XML 라벨 format을 각 이미지마다의 YOLO format으로 변경해 저장하기 위해 이 소스 코드 파일을 활용합니다.
+     AI-hub에서 인도보행 Bounding Box 데이터셋을 다운로드 받으면 여러 개의 폴더로 나누어져 있습니다. Bbox_****(ex. Bbox_0001) 이름의 폴더가 있으며 각 폴더 안에는 평균적으로 100개의 이미지와 하나의 XML 라벨 파일이 있습니다. 이 XML 라벨 format을 각 이미지마다의 YOLO format으로 변경해 저장하기 위해 이 소스 코드 파일을 활용합니다.
      
      만약 다른 데이터셋을 활용한다면, 활용하는 데이터셋의 클래스를 참고해 class_mapping을 수정하면 됩니다.
   
@@ -49,6 +49,11 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
      이 때, 이미지를 저장할 폴더와 라벨을 저장할 폴더를 분리하고, Bbox_****폴더 안에 라벨을 하나씩 저장하길 권장드립니다.(추후 확인을 위해)
      
    - checkData.ipynb
+     파일을 해당 폴더로 옮기고, 데이터가 제대로 분류되어 맞느 폴더에 저장되었는지 확인하는 소스 코드 파일입니다.
+     해당 소스코드의 텍스트(주석)을 참고하면 더 도움이 될 수 있습니다.
+     labels 폴더로 label이 있는 XML 파일을 옮기는 소스 코드가 포함되어 있습니다. 이는 xmlTOyolo.ipynb 파일을 실행하기 전해 수행하는 것을 권장드립니다.
+     위의 코드가 수행되었다면 images/Bbox_****과 labels/Bbox_****에는 각각 이미지와 이 이미지에 해당하는 라벨이 저장되어 있습니다.
+     제대로 저장되어 있는지 확인하기 위해 소스코드의 '폴더에 있는 파일 개수 세기'를 실행합니다. images/Bbox_****과 labels/Bbox_****안에 있는 파일 개수 차이가 1이라면 제대로 저장된 것입니다. (labels/Bbox_****)에 있는 
    - data.yaml
    - yolov8.ipynb
 
