@@ -21,8 +21,12 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 ---
 ## YOLOv6을 활용한 모델과 UI 설명
 1. YOLOv8 모델
-   - 
-3. UI
+   - YOLOv8은 2023년 1월 발표된 버전으로, 현재 YOLOv10까지 발표되었으나 자료가 풍부한 YOLOv8을 채택했습니다.
+   - YOLO는 실시간 객체 검출 알고리즘으로, 객체 검출을 단 한번의 순전파만으로 수행하는 효율적인 방법입니다.
+   - AI-Hub의 인도보행 영상 Bounding Box 데이터셋을 활용해 모델을 훈련시켰습니다.(데이터셋 링크: https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=&topMenu=&aihubDataSe=data&dataSetSn=189)
+   - 데이터를 저장햘 용량 문제와 GPU 문제로 약 4000개의 데이터밖에 활용 못했지만, 성능 향상을 위해 훨씬 더 많은 데이터를 사용할 것을 권장드립니다.
+   - YOLOv8 CLI를 통해 모델을 train, validation, test 하였습니다.
+2. UI
    - 화면 상단의 좌측에는 진동 모드 ON/OFF 버튼, 우측에는 종료 버튼을 배치했습니다.
    - 사용자가 시각장애인임을 고려하여 꼭 버튼이 아니더라도 화면 왼쪽/오른쪽만 터치해도 버튼 기능이 작동하도록 하였습니다.
    - 어플리케이션이 잘 실행되는지 확인하기 위해 화면 중앙에 카메라 화면을 띄웠습니다.
