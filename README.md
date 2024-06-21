@@ -97,6 +97,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
    </details>
 
 2. UI 코드 설명
+   Android Studio에서 Front-end/AndroidProject/app/src/main 파일을 열면 코드를 확인할 수 있습니다.
    <details>
    <summary> AndroidManifest.xml </summary>
    인터넷 진동, 카메라 기능 권한을 추가하였고 화면 자동 회전을 비활성화했습니다.
