@@ -36,6 +36,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 1. YOLOv8 폴더 설명
    - Colab의 GPU와 Google Drive을 사용해 YOLOv8 모델을 학습시켰습니다. 따라서 Colab에서 GPU를 연결한 뒤, Google Drive를 mount해야 합니다.
    - xmlToyolo.ipynb 파일
+     
 
      XML 형식의 라벨링 format을 YOLO format으로 변경해 저장하는 소스코드입니다.
      
@@ -49,6 +50,8 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
      이 때, 이미지를 저장할 폴더와 라벨을 저장할 폴더를 분리하고, Bbox_****폴더 안에 라벨을 하나씩 저장하길 권장드립니다.(추후 확인을 위해)
      
    - checkData.ipynb
+  
+     
      파일을 해당 폴더로 옮기고, 데이터가 제대로 분류되어 맞느 폴더에 저장되었는지 확인하는 소스 코드 파일입니다.
   
      
@@ -71,12 +74,16 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
      삭제 후, '정리된 label과 image를 my_data/train으로 옮기기'를 실행합니다. 이후, my_data/test와 my_data/val에도 같은 작업을 수행해 모델 훈련을 준비합니다.(단, 폴더 구조는 아래와 같아야 합니다.)
 
    - data.yaml
+  
+     
      YOLOv8 기준 yaml 파일입니다.
   
      
      자신이 활용하는 데이터셋의 클래스와 폴더 경로를 참고하여 작성해주세요.PATH에는 데이터 경로가 들어가야 하며, train,test,val에는 이미지 폴더의 경로가 들어가야 합니다.
 
    - yolov8.ipynb
+  
+     
      YOLOv8 CLI를 활용해 모델을 훈련 시킵니다.
   
      
