@@ -66,7 +66,7 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
      삭제 후, '정리된 label과 image를 my_data/train으로 옮기기'를 실행합니다. 이후, my_data/test와 my_data/val에도 같은 작업을 수행해 모델 훈련을 준비합니다.(단, 폴더 구조는 아래와 같아야 합니다.)
   
      
-     <img src="https://github.com/jinsol24/OSS-project/assets/144991060/e90f54ad-0622-4398-817a-a5128db448f6.png" width="180" height="300"/>
+     <img src="https://github.com/jinsol24/OSS-project/assets/144991060/e90f54ad-0622-4398-817a-a5128db448f6.png" width="200" height="300"/>
      
    - data.yaml
   
