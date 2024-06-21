@@ -139,7 +139,8 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 
    <details>
    <summary> DataProcess.kt, RectView.kt, Result.kt </summary>
-   YOLO 모델 연결과 Bounding Box 표시에 관한 코드입니다. 다음 링크를 참고하였습니다. [YOLO 모델 연결과 사용법](https://velog.io/@aloe/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EC%B9%B4%EB%A9%94%EB%9D%BC-%EB%AF%B8%EB%A6%AC-%EB%B3%B4%EA%B8%B0)
+   YOLO 모델 연결과 Bounding Box 표시에 관한 코드입니다. 다음 링크를 참고하였습니다. 
+   <a href="https://velog.io/@aloe/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EC%B9%B4%EB%A9%94%EB%9D%BC-%EB%AF%B8%EB%A6%AC-%EB%B3%B4%EA%B8%B0" target="_blank">YOLO 모델 연결과 사용법</a>
    </details>
 
    <details>
