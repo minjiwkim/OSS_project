@@ -18,3 +18,13 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 + 사용 툴: Android Studio Jellyfish, Colab, GitHub
 + 설치 및 실행 방법: Android Sudio를 설치하고 Code-clone한 후 Front-end/AndroidProject를 실행합니다. 안드로이드 기반 스마트폰의 설정-휴대전화 정보-소프트웨어 정보에서 빌드 번호 5번을 누르면 개발자 옵션이 생기는데, 이 옵션에서 USB 디버깅을 켜고 휴대폰과 컴퓨터를 USB 선으로 연결합니다. Android Studio에서 run을 누르면 휴대폰에서 앱이 실행됩니다.
 + 라이선스: MIT license
+---
+## YOLOv6을 활용한 모델과 UI 설명
+1. YOLOv8 모델
+   - 
+3. UI
+   - 화면 상단의 좌측에는 진동 모드 ON/OFF 버튼, 우측에는 종료 버튼을 배치했습니다.
+   - 사용자가 시각장애인임을 고려하여 꼭 버튼이 아니더라도 화면 왼쪽/오른쪽만 터치해도 버튼 기능이 작동하도록 하였습니다.
+   - 어플리케이션이 잘 실행되는지 확인하기 위해 화면 중앙에 카메라 화면을 띄웠습니다.
+   - 어플리케이션이 잘 실행되는지 확인하기 위해 팝업창으로 위험요소 회피 문구 안내하도록 했습니다. (음성으로도 안내함)
+
