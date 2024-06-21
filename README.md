@@ -64,14 +64,14 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
   
      
      삭제 후, '정리된 label과 image를 my_data/train으로 옮기기'를 실행합니다. 이후, my_data/test와 my_data/val에도 같은 작업을 수행해 모델 훈련을 준비합니다.(단, 폴더 구조는 아래와 같아야 합니다.)
-
+     <img src="https://github.com/jinsol24/OSS-project/assets/144991060/09f8e6fb-8632-4d39-a056-0198621671e9.png" width="180" height="400"/>
    - data.yaml
   
      
      YOLOv8 기준 yaml 파일입니다.
   
      
-     자신이 활용하는 데이터셋의 클래스와 폴더 경로를 참고하여 작성해주세요.PATH에는 데이터 경로가 들어가야 하며, train,test,val에는 이미지 폴더의 경로가 들어가야 합니다.
+     자신이 활용하는 데이터셋의 클래스와 폴더 경로를 참고하여 작성해주세요. PATH에는 데이터 경로가 들어가야 하며, train,test,val에는 이미지 폴더의 경로가 들어가야 합니다.
 
    - yolov8.ipynb
   
