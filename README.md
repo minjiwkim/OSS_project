@@ -34,10 +34,19 @@ object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사
 ---
 ## 활용 방법 설명(각 소스 코드 파일 설명)
 1. YOLOv8 폴더 설명
-   - Colab의 GPU와 Google Drive을 사용해 YOLOv8 모델을 학습시켰습니다.
+   - Colab의 GPU와 Google Drive을 사용해 YOLOv8 모델을 학습시켰습니다. 따라서 Colab에서 GPU를 연결한 뒤, Google Drive를 mount해야 합니다.
    - xmlToyolo.ipynb 파일
 
      XML 형식의 라벨링 format을 YOLO format으로 변경해 저장하는 소스코드입니다.
+     
+     AI-hub에서 인도보행 Bounding Box 데이터셋을 다운로드 받으면 여러 개의 폴더로 나누어져 있습니다. Bbox_****(ex. Bbox_0001) 이름의 폴더가 있으며 각 폴더 안에는 평균적으로 100개의 이미지와 하나의 XML 라벨 파일있습니다. 이 XML 라벨 format을 각 이미지마다의 YOLO format으로 변경해 저장하기 위해 이 소스 코드 파일을 활용합니다.
+     
+     만약 다른 데이터셋을 활용한다면, 활용하는 데이터셋의 클래스를 참고해 class_mapping을 수정하면 됩니다.
+  
+     활용할 때, file_path를 수정해야 합니다.
+  
+     
+     이 때, 이미지를 저장할 폴더와 라벨을 저장할 폴더를 분리하고, Bbox_****폴더 안에 라벨을 하나씩 저장하길 권장드립니다.(추후 확인을 위해)
      
    - checkData.ipynb
    - data.yaml
