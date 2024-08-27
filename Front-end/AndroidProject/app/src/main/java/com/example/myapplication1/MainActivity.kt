@@ -32,6 +32,7 @@ import ai.onnxruntime.OnnxTensor
 import ai.onnxruntime.OrtEnvironment
 import ai.onnxruntime.OrtSession
 import android.content.res.AssetManager
+import android.media.MediaPlayer
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private lateinit var textToSpeech: TextToSpeech
     private lateinit var popupWindow: PopupWindow
     private lateinit var currentPopupText: String
+    private lateinit var dingLeftPlayer: MediaPlayer
+    private lateinit var dingRightPlayer: MediaPlayer
 
     private var isVibrateModeOn: Boolean = false
     private var isExiting: Boolean = false
@@ -64,6 +67,9 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        dingLeftPlayer = MediaPlayer.create(this, R.raw.ding_left)
+        dingRightPlayer = MediaPlayer.create(this, R.raw.ding_right)
 
         lastDetectionTime = System.currentTimeMillis()
 
@@ -250,6 +256,11 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         val popupView = inflater.inflate(R.layout.activity_popup, null)
         popupWindow = PopupWindow(popupView, WRAP_CONTENT, WRAP_CONTENT)
 
+        // 팝업에 표시할 텍스트를 설정
+        val textViewPopup = popupView.findViewById<TextView>(R.id.textViewPopup)
+        val translatedText = translatePopupText(text)
+        textViewPopup.text = translatedText
+
         val slideUp = TranslateAnimation(
             Animation.RELATIVE_TO_SELF, 0f,
             Animation.RELATIVE_TO_SELF, 0f,
@@ -264,26 +275,48 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             popupWindow.showAtLocation(mainView, Gravity.BOTTOM, 0, 0)
             popupView.startAnimation(slideUp)
 
-            // 팝업 창에 결과 텍스트 표시
-            val popupText = popupView.findViewById<TextView>(R.id.textViewPopup)
-            popupText.text = text
-
-            val params = Bundle().apply {
-                putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "popupTTS")
-            }
-            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params, "popupTTS")
-
             // 진동 모드가 켜져 있는 경우, 방향에 따라 진동 실행
             if (isVibrateModeOn) {
+                val params = Bundle().apply {
+                    putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "popupTTS")
+                }
+                textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params, "popupTTS")
+
                 if (direction == "오른쪽으로") {
                     vibrateMultipleTimes(2)
                 } else {
                     vibrateMultipleTimes(1)
                 }
+            } else {
+                // 진동 모드가 꺼져 있는 경우, 방향에 따라 소리 재생
+                val mediaPlayer = when (direction) {
+                    "오른쪽으로" -> dingRightPlayer
+                    else -> dingLeftPlayer
+                }
+
+                // 소리 재생 후 TTS 실행
+                mediaPlayer.setOnCompletionListener {
+                    val params = Bundle().apply {
+                        putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "popupTTS")
+                    }
+                    textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params, "popupTTS")
+                }
+
+                mediaPlayer.start()
             }
         }
     }
 
+    private fun translatePopupText(text: String): String {
+        var translatedText = text
+
+        // 객체 이름을 번역하여 문장 내에서 대체
+        objectTranslations.forEach { (english, korean) ->
+            translatedText = translatedText.replace(english, korean)
+        }
+
+        return translatedText
+    }
 
     private fun setCamera() {
         //카메라 제공 객체
