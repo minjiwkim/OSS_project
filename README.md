@@ -67,7 +67,7 @@ Create a real-world usable, open-source app that empowers visually impaired indi
 
 ---
 
-# 📚 Korean Version | 한국어 버전
+# 📚 Korean Version
 
 ## 시각 장애인을 위한 보행 안내서비스, 시야 
 
