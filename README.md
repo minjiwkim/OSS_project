@@ -60,28 +60,17 @@ Create a real-world usable, open-source app that empowers visually impaired indi
 
 ---
 
-## 📸 Screenshots (Optional)
-
-<!-- 이미지가 있을 경우 여기에 삽입 -->
-<!--
-![Main Screen](screenshots/main.jpg)
-![Detection Screen](screenshots/detect.jpg)
--->
-
----
-
 ## 📎 Links
 
 - 🔗 [YOLOv8 - Ultralytics](https://github.com/ultralytics/ultralytics)
 - 🔗 [AI Hub Dataset](https://aihub.or.kr)
 
-
 ---
 
+# 📚 Korean Version | 한국어 버전
 
-# 공개SW 개발자 대회 project
----
-## 시각 장애인을 위한 보행 안내서비스, 시야
+## 시각 장애인을 위한 보행 안내서비스, 시야 
+
 object detection deeplearning model인 YOLO(You Only Look Once) version 8을 사용하여 시각장애인이 보행 중 위협 요소가 되는 각종 장애물을 피할 수 있도록 돕는 Android 기반 애플리케이션입니다.
 
 <img src="https://github.com/jinsol24/OSS-project/assets/144991060/79ac8dcb-d835-46ab-97bc-db1b46fca0cc.png" width="180" height="400"/>
