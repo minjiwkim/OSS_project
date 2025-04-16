@@ -1,15 +1,15 @@
-# 📱 Vision Assist – Navigation Guide App for the Visually Impaired  
-### 視野 – 視覚障害者のための歩行ナビアプリ
+# 📱 Seeya(Vision Assist) – Navigation Guide App for the Visually Impaired  
+### シヤ(視野) – 視覚障害者のための歩行ナビアプリ
 
 ---
 
 ## 🧩 Project Overview | プロジェクト概要
 
 **EN**  
-Vision Assist is an Android-based navigation assistant app designed to help visually impaired individuals avoid obstacles in real time. It integrates a YOLOv8 object detection model trained on pedestrian walkway video data from AI Hub. The app provides multimodal feedback through Text-to-Speech (TTS), vibration, and sound effects, with a UI/UX designed for accessibility and ease of use.
+Seeya(Vision Assist) is an Android-based navigation assistant app designed to help visually impaired individuals avoid obstacles in real time. It integrates a YOLOv8 object detection model trained on pedestrian walkway video data from AI Hub. The app provides multimodal feedback through Text-to-Speech (TTS), vibration, and sound effects, with a UI/UX designed for accessibility and ease of use.
 
 **JP**  
-視野は、視覚障がい者が安全に歩行できるよう支援するAndroidアプリです。AI Hubの歩道映像データで訓練されたYOLOv8物体検出モデルを使用し、リアルタイムで障害物を検出します。音声読み上げ（TTS）、振動、効果音を通じてユーザーに障害物回避を案内し、アクセシビリティに配慮したUI/UXを実現しました。
+シヤ（視野）は、視覚障がい者が安全に歩行できるよう支援するAndroidアプリです。AI Hubの歩道映像データで訓練されたYOLOv8物体検出モデルを使用し、リアルタイムで障害物を検出します。音声読み上げ（TTS）、振動、効果音を通じてユーザーに障害物回避を案内し、アクセシビリティに配慮したUI/UXを実現しました。
 
 ---
 
