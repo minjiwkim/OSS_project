@@ -1,5 +1,5 @@
 # 📱 Vision Assist – Navigation Guide App for the Visually Impaired  
-### 視野 – 視覚障がい者のための歩行ナビアプリ
+### 視野 – 視覚障害者のための歩行ナビアプリ
 
 ---
 
