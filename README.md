@@ -1,3 +1,84 @@
+# 📱 Vision Assist – Navigation Guide App for the Visually Impaired  
+### 視野 – 視覚障がい者のための歩行ナビアプリ
+
+---
+
+## 🧩 Project Overview | プロジェクト概要
+
+**EN**  
+Vision Assist is an Android-based navigation assistant app designed to help visually impaired individuals avoid obstacles in real time. It integrates a YOLOv8 object detection model trained on pedestrian walkway video data from AI Hub. The app provides multimodal feedback through Text-to-Speech (TTS), vibration, and sound effects, with a UI/UX designed for accessibility and ease of use.
+
+**JP**  
+視野は、視覚障がい者が安全に歩行できるよう支援するAndroidアプリです。AI Hubの歩道映像データで訓練されたYOLOv8物体検出モデルを使用し、リアルタイムで障害物を検出します。音声読み上げ（TTS）、振動、効果音を通じてユーザーに障害物回避を案内し、アクセシビリティに配慮したUI/UXを実現しました。
+
+---
+
+## 🛠️ Technologies | 使用技術
+
+- YOLOv8 (Ultralytics)
+- Android Studio (Java)
+- Google Text-to-Speech API
+- ONNX / TensorFlow Lite
+- Google Colab (Model Training)
+
+---
+
+## 💡 Key Features | 主な機能
+
+- ✅ Real-time object detection for pedestrian walkways  
+  歩道向けのリアルタイム物体検出  
+- ✅ Multimodal user guidance (TTS, vibration, sound)  
+  音声・振動・効果音による多モーダル案内  
+- ✅ Pop-up alerts and intuitive navigation cues  
+  ポップアップ通知と直感的なナビゲーション  
+- ✅ Minimal and accessible UI design  
+  シンプルかつアクセシブルなユーザインタフェース  
+
+---
+
+## 📂 Role & Contributions | 担当・貢献内容
+
+**EN**  
+- Trained a YOLOv8 model using AI Hub pedestrian walkway dataset  
+- Converted model to ONNX and TensorFlow Lite for Android integration  
+- Developed Android app including UI, TTS, vibration and alert system  
+- Designed and implemented accessibility-focused user experience  
+
+**JP**  
+- AI Hubの歩道データを用いてYOLOv8モデルを訓練  
+- ONNXおよびTensorFlow Lite形式でAndroid用に変換・統合  
+- UI、TTS、振動、アラートシステムを含むAndroidアプリを開発  
+- アクセシビリティ重視のユーザー体験設計を実施  
+
+---
+
+## 🎯 Goal | 目標
+
+Create a real-world usable, open-source app that empowers visually impaired individuals to walk safely and independently using advanced AI technology.
+
+先進的なAI技術を活用し、視覚障がい者が安全かつ自立して歩行できるよう支援する、実用的でオープンソースなアプリの開発を目指しました。
+
+---
+
+## 📸 Screenshots (Optional)
+
+<!-- 이미지가 있을 경우 여기에 삽입 -->
+<!--
+![Main Screen](screenshots/main.jpg)
+![Detection Screen](screenshots/detect.jpg)
+-->
+
+---
+
+## 📎 Links
+
+- 🔗 [YOLOv8 - Ultralytics](https://github.com/ultralytics/ultralytics)
+- 🔗 [AI Hub Dataset](https://aihub.or.kr)
+
+
+---
+
+
 # 공개SW 개발자 대회 project
 ---
 ## 시각 장애인을 위한 보행 안내서비스, 시야
