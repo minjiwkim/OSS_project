@@ -1,4 +1,4 @@
-# Vision Assist – Navigation Guide App for the Visually Impaired  
+# 📱 Vision Assist – Navigation Guide App for the Visually Impaired  
 ### 視野 – 視覚障がい者のための歩行ナビアプリ
 
 ---
@@ -16,7 +16,7 @@ Vision Assist is an Android-based navigation assistant app designed to help visu
 ## 🛠️ Technologies | 使用技術
 
 - YOLOv8 (Ultralytics)
-- Android Studio (Java)
+- Android Studio (Kotlin)
 - Google Text-to-Speech API
 - ONNX / TensorFlow Lite
 - Google Colab (Model Training)
