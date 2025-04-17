@@ -28,11 +28,11 @@ Seeya (Vision Assist) is an Android-based navigation assistant app designed to h
 - ✅ Real-time object detection for pedestrian walkways  
   歩道向けのリアルタイム物体検出  
 - ✅ Multimodal user guidance (TTS, vibration, sound)  
-  音声・振動・効果音による多モーダル案内  
+  音声・振動・効果音によるマルチモーダル案内  
 - ✅ Pop-up alerts and intuitive navigation cues  
   ポップアップ通知と直感的なナビゲーション  
 - ✅ Minimal and accessible UI design  
-  シンプルかつアクセシブルなユーザインタフェース  
+  シンプルでアクセシビリティの高いユーザーインターフェース  
 
 ---
 
@@ -52,7 +52,7 @@ Seeya (Vision Assist) is an Android-based navigation assistant app designed to h
 | モデル訓練 | AI Hubの歩道データを用いてYOLOv8モデルを訓練 | Jinsol Kim |
 | モデル変換 | ONNXおよびTensorFlow Lite形式でAndroid用に変換・統合 | Jinsol Kim |
 | アプリ開発 | UI、TTS、振動、アラートシステムを含むAndroidアプリを開発 | Minji Kim, Sehui Park |
-| UX設計 | アクセシビリティ重視のユーザー体験設計を実施 | Minji Kim, Sehui Park |
+| UX設計 | アクセシビリティ重視のユーザー体験を設計 | Minji Kim, Sehui Park |
 
 ---
 
