@@ -9,7 +9,7 @@
 Seeya (Vision Assist) is an Android-based navigation assistant app designed to help visually impaired individuals avoid obstacles in real time. It integrates a YOLOv8 object detection model trained on pedestrian walkway video data from AI Hub. The app provides multimodal feedback through Text-to-Speech (TTS), vibration, and sound effects, with a UI/UX designed for accessibility and ease of use.
 
 **JP**  
-シヤ（視野）は、視覚障がい者が安全に歩行できるよう支援するAndroidアプリです。AI Hubの歩道映像データで訓練されたYOLOv8物体検出モデルを使用し、リアルタイムで障害物を検出します。音声読み上げ（TTS）、振動、効果音を通じてユーザーに障害物回避を案内し、アクセシビリティに配慮したUI/UXを実現しました。
+シヤ（視野）は、視覚障害者が安全に歩行できるよう支援するAndroidアプリです。AI Hubの歩道映像データで訓練されたYOLOv8物体検出モデルを使用し、リアルタイムで障害物を検出します。音声読み上げ（TTS）、振動、効果音を通じてユーザーに障害物回避を案内し、アクセシビリティに配慮したUI/UXを実現しました。
 
 ---
 
@@ -39,24 +39,28 @@ Seeya (Vision Assist) is an Android-based navigation assistant app designed to h
 ## 📂 Role & Contributions | 担当・貢献内容
 
 **EN**  
-- Trained a YOLOv8 model using AI Hub pedestrian walkway dataset  
-- Converted model to ONNX and TensorFlow Lite for Android integration  
-- Developed Android app including UI, TTS, vibration and alert system  
-- Designed and implemented accessibility-focused user experience  
+| Task | Description | Contributor(s) |
+|------|-------------|----------------|
+| Model Training | Trained YOLOv8 model using AI Hub dataset | Jinsol Kim |
+| Model Conversion | Converted to ONNX & TFLite for Android | Jinsol Kim |
+| App Development | Built Android app with UI, TTS, vibration | Minji Kim, Sehui Park |
+| UX Design | Designed accessibility-centered experience | Minji Kim, Sehui Park |
 
 **JP**  
-- AI Hubの歩道データを用いてYOLOv8モデルを訓練  
-- ONNXおよびTensorFlow Lite形式でAndroid用に変換・統合  
-- UI、TTS、振動、アラートシステムを含むAndroidアプリを開発  
-- アクセシビリティ重視のユーザー体験設計を実施  
+| タスク | 説明 | 貢献者 |
+|--------|------|--------|
+| モデル訓練 | AI Hubの歩道データを用いてYOLOv8モデルを訓練 | Jinsol Kim |
+| モデル変換 | ONNXおよびTensorFlow Lite形式でAndroid用に変換・統合 | Jinsol Kim |
+| アプリ開発 | UI、TTS、振動、アラートシステムを含むAndroidアプリを開発 | Minji Kim, Sehui Park |
+| UX設計 | アクセシビリティ重視のユーザー体験設計を実施 | Minji Kim, Sehui Park |
 
 ---
 
 ## 🎯 Goal | 目標
 
-Create a real-world usable, open-source app that empowers visually impaired individuals to walk safely and independently using advanced AI technology.
+Create a real-world usable, open-source app that empowers visually impaired individuals to walk safely and independently using AI technology.
 
-先進的なAI技術を活用し、視覚障がい者が安全かつ自立して歩行できるよう支援する、実用的でオープンソースなアプリの開発を目指しました。
+AI技術を活用し、視覚障害者の方々が安全に自立して歩行できるよう支援するのに役立つ、実用的なアプリの開発を目指しました。
 
 ---
 
